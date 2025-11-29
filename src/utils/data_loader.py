@@ -7,7 +7,12 @@ import pandas as pd
 from pathlib import Path
 from tqdm import tqdm
 import numpy as np
-from .config import RAW_DATA_DIR, PROCESSED_DATA_DIR, ModelConfig
+
+# Handle imports for both module and script usage
+try:
+    from .config import RAW_DATA_DIR, PROCESSED_DATA_DIR, ModelConfig
+except ImportError:
+    from config import RAW_DATA_DIR, PROCESSED_DATA_DIR, ModelConfig
 
 
 class PlaylistDataLoader:

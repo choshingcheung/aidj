@@ -9,7 +9,12 @@ import json
 from pathlib import Path
 from tqdm import tqdm
 import time
-from .config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, CACHE_DIR
+
+# Handle imports for both module and script usage
+try:
+    from .config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, CACHE_DIR
+except ImportError:
+    from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, CACHE_DIR
 
 class SpotifyFeatureFetcher:
     """
