@@ -31,55 +31,32 @@ aidj/
 │   ├── figures/          # Plots and visualizations
 │   ├── audio/            # Generated playlist audio
 │   └── results/          # Evaluation results
-├── requirements.txt
+├── environment.yml       # Conda environment file
 └── README.md
 ```
 
-## Setup Instructions
+## Quick Setup
 
-### 1. Clone the Repository
-
-```bash
-git clone <repository-url>
-cd aidj
-```
-
-### 2. Create Virtual Environment
+**Works on both Mac and Windows!**
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+# Create conda environment
+conda env create -f environment.yml
+
+# Activate environment
+conda activate aidj
+
+# Start Jupyter
+jupyter notebook
 ```
 
-### 3. Install Dependencies
+**📖 For detailed setup instructions, see [SETUP.md](SETUP.md)**
 
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Download Dataset
-
-1. Visit [Spotify Million Playlist Dataset Challenge](https://www.aicrowd.com/challenges/spotify-million-playlist-dataset-challenge)
-2. Download the dataset (requires free AICrowd account)
-3. Extract to `data/raw/`
-
-### 5. Set Up Spotify API Credentials
-
-1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
-2. Create a new app
-3. Copy your Client ID and Client Secret
-4. Create a `.env` file in the project root:
-
-```bash
-SPOTIFY_CLIENT_ID=your_client_id_here
-SPOTIFY_CLIENT_SECRET=your_client_secret_here
-```
-
-### 6. Run the Notebook
-
-```bash
-jupyter notebook notebooks/ai_dj_main.ipynb
-```
+This includes:
+- Installing conda (if needed)
+- Downloading Spotify dataset
+- Setting up API credentials
+- Platform-specific tips
 
 ## Predictive Tasks
 
