@@ -1,1 +1,94 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# Environment variables
+.env
+.env.local
+config.py
+spotify_credentials.json
+
+# Data files (too large for git)
+data/raw/*
+data/processed/*
+data/features/*
+data/cache/*
+
+# Keep directory structure
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/features/.gitkeep
+!data/cache/.gitkeep
+
+# Audio files (large)
+outputs/audio/*
+!outputs/audio/.gitkeep
+
+# Model checkpoints
+*.pkl
+*.joblib
+*.h5
+*.ckpt
+models/
+
+# Outputs (except structure)
+outputs/figures/*.png
+outputs/figures/*.jpg
+outputs/results/*.json
+outputs/results/*.csv
+
+# Keep directory structure
+!outputs/figures/.gitkeep
+!outputs/results/.gitkeep
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Spleeter pretrained models cache
+pretrained_models/
+
+# Large dataset files
+*.zip
+*.tar.gz
+*.mpd-slice*
+*.json.gz
+
+158 _ 258 2025 Assignment 2.pdf
 AI_DJ_Project_Plan.md
