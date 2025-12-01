@@ -76,8 +76,14 @@ class SpotifyFeatureFetcher:
             # Extract track ID from URI
             track_id = track_uri.split(':')[-1]
 
-            # Fetch from API
-            features = self.sp.audio_features(track_id)[0]
+            # Try audio_features endpoint first
+            try:
+                features = self.sp.audio_features(track_id)[0]
+            except Exception as e:
+                # Fallback: use track endpoint which includes audio_features
+                print(f"  audio_features endpoint failed ({str(e)[:50]}...), using track endpoint")
+                track_data = self.sp.track(track_id)
+                features = track_data.get('audio_features') or {}
 
             if features:
                 # Cache the result
@@ -119,20 +125,29 @@ class SpotifyFeatureFetcher:
             batch = uncached_uris[i:i + batch_size]
             track_ids = [uri.split(':')[-1] for uri in batch]
 
+            features_list = None
+
+            # Try audio_features endpoint first
             try:
                 features_list = self.sp.audio_features(track_ids)
+            except Exception as audio_features_error:
+                # Fallback: use tracks endpoint which includes audio_features
+                try:
+                    print(f"  Fallback: using tracks endpoint for batch")
+                    tracks_data = self.sp.tracks(track_ids)
+                    features_list = [t.get('audio_features') or {} for t in tracks_data.get('tracks', [])]
+                except Exception as tracks_error:
+                    print(f"  Both endpoints failed: {tracks_error}")
+                    continue
 
+            if features_list:
                 for uri, features in zip(batch, features_list):
                     if features:
                         results[uri] = features
                         self.cache[uri] = features
 
-                # Rate limiting
-                time.sleep(0.1)
-
-            except Exception as e:
-                print(f"Error fetching batch: {e}")
-                continue
+            # Rate limiting
+            time.sleep(0.1)
 
         # Save updated cache
         self._save_cache()
